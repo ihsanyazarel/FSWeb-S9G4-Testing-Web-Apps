@@ -4,33 +4,24 @@ import '@testing-library/jest-dom/extend-expect';
 import userEvent from '@testing-library/user-event';
 import IletisimFormu from './IletisimFormu';
 
-const getNameInput = () => { 
-    return screen.getByLabelText("Ad*"); //Ad inputu seçimi
-}
-const setNameInput = (val) =>{
-    userEvent.type(getNameInput(), val); //Ad inputuna veri girişi
-}
-const getSurnameInput = () => {
-    return screen.getByLabelText("Soyad*"); //Soyad inputu seçimi
-}
-const setSurnameInput = (val) =>{
-    userEvent.type(getSurnameInput(), val); //Soyad inputuna veri girişi
-}
-const getEmailInput = () => {
-    return screen.getByLabelText("Email*"); //Email inputu seçimi
-}
-const setEmailInput = (val) =>{
-    userEvent.type(getEmailInput(), val);  //Email inputuna veri girişi
-}
-const buttonClick = () => {
-    userEvent.click(screen.getByRole("button")); //Buton seçim ve click
-}
-const getError = () => {
-    return screen.queryByTestId("error");   //error id'li elementin seçimi
-}
-const getAllErrors = () => {
-    return screen.queryAllByTestId("error"); // error id'li tüm elementlerin seçimi. Array döndürür
-}
+const getNameInput = () => screen.getByLabelText("Ad*"); //Ad inputu seçimi
+
+const setNameInput = (val) =>{userEvent.type(getNameInput(), val);} //Ad inputuna veri girişi
+
+const getSurnameInput = () => screen.getByLabelText("Soyad*"); //Soyad inputu seçimi
+
+const setSurnameInput = (val) =>{userEvent.type(getSurnameInput(), val);} //Soyad inputuna veri girişi
+
+const getEmailInput = () => screen.getByLabelText("Email*"); //Email inputu seçimi
+
+const setEmailInput = (val) =>{userEvent.type(getEmailInput(), val);}  //Email inputuna veri girişi
+
+const buttonClick = () => {userEvent.click(screen.getByRole("button"));} //Buton seçim ve click
+
+const getError = () => screen.queryByTestId("error");   //error id'li elementin seçimi
+
+const getAllErrors = () => screen.queryAllByTestId("error"); // error id'li tüm elementlerin seçimi. Array döndürür
+
 
 beforeEach(() => {
     render(<IletisimFormu/>);
@@ -79,7 +70,7 @@ test('ad,soyad, email render ediliyor. mesaj bölümü doldurulmadığında hata
     setSurnameInput("Yazarel");
     setEmailInput("test@mail.com");
     buttonClick();
-    expect(getError()).toBe(null);
+    expect(getError()).not.toBeInTheDocument();
 });
 
 test('form gönderildiğinde girilen tüm değerler render ediliyor.', async () => {
